@@ -1,6 +1,5 @@
 package com.diego.customer.customer;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
