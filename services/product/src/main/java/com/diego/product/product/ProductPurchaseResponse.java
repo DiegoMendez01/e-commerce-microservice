@@ -1,5 +1,7 @@
 package com.diego.product.product;
 
+import java.math.BigDecimal;
+
 public record ProductPurchaseResponse(
         Integer productId,
         String name,
