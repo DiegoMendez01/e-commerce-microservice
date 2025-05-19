@@ -1,7 +1,6 @@
 package com.diego.product.product;
 
 import com.diego.product.category.Category;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 @Component

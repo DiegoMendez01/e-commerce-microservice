@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handle(MethodArgumentNotValidException exp) {
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
         var errors = new HashMap<String, String>();
         exp.getBindingResult().getAllErrors()
                 .forEach(error -> {
@@ -41,6 +41,6 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(errors.toString());
+                .body(new ErrorResponse(errors));
     }
 }
