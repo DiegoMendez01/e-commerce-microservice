@@ -2,7 +2,6 @@ package com.diego.ecommerce.payment;
 
 import com.diego.ecommerce.notification.NotificationProducer;
 import com.diego.ecommerce.notification.PaymentNotificationRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
