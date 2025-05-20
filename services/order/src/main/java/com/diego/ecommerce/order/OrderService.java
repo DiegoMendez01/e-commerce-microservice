@@ -6,6 +6,8 @@ import com.diego.ecommerce.kafka.OrderConfirmation;
 import com.diego.ecommerce.kafka.OrderProducer;
 import com.diego.ecommerce.orderline.OrderLineRequest;
 import com.diego.ecommerce.orderline.OrderLineService;
+import com.diego.ecommerce.payment.PaymentClient;
+import com.diego.ecommerce.payment.PaymentRequest;
 import com.diego.ecommerce.product.ProductClient;
 import com.diego.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +27,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createdOrder(OrderRequest request) {
         // check the customer --> OpenFeign
@@ -48,6 +51,15 @@ public class OrderService {
             );
         }
 
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
+
         // persis order lines
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
@@ -58,8 +70,6 @@ public class OrderService {
                         purchasedProducts
                 )
         );
-
-        // start payment process
 
         // send order confirmation --> notification-ms (kafka)
         return order.getId();
