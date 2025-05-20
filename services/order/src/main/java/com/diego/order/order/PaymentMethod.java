@@ -1,9 +1,0 @@
-package com.diego.order.order;
-
-public enum PaymentMethod {
-    PAYPAL,
-    CREDIT_CARD,
-    VISA,
-    MASTERCARD,
-    BITCOIN
-}

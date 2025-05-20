@@ -10,7 +10,7 @@
         <module name="config-server" />
         <module name="discovery" />
       </profile>
-      <profile name="Annotation profile for order" enabled="true">
+      <profile name="Annotation profile for ecommerce" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -18,8 +18,18 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
         <module name="product" />
-        <module name="order" />
         <module name="customer" />
+        <module name="order" />
+      </profile>
+      <profile name="Annotation profile for payment" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="payment" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />
@@ -30,6 +40,7 @@
       <module name="customer" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="order" options="-parameters" />
+      <module name="payment" options="-parameters" />
       <module name="product" options="-parameters" />
     </option>
   </component>

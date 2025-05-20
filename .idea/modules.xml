@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ecommerce.iml" filepath="$PROJECT_DIR$/ecommerce.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/discovery/src/main/main2.iml" filepath="$PROJECT_DIR$/services/discovery/src/main/main2.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/discovery/src/test/test2.iml" filepath="$PROJECT_DIR$/services/discovery/src/test/test2.iml" />
     </modules>
