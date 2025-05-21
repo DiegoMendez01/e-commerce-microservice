@@ -42,6 +42,7 @@
         <module>services/product</module>
         <module>services/payment</module>
         <module>services/notification</module>
+        <module>services/api-gateway</module>
     </modules>
 
 </project>
