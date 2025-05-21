@@ -8,10 +8,10 @@ public enum EmailTemplates {
     ;
 
     @Getter
-    private String template;
+    private final String template;
 
     @Getter
-    private String subject;
+    private final String subject;
 
     EmailTemplates(String template, String subject) {
         this.template = template;
