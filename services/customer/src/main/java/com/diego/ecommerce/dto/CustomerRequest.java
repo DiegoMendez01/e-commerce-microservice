@@ -1,5 +1,6 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.dto;
 
+import com.diego.ecommerce.models.Address;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 

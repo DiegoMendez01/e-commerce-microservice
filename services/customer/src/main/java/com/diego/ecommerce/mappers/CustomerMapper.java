@@ -1,5 +1,8 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.mappers;
 
+import com.diego.ecommerce.dto.CustomerRequest;
+import com.diego.ecommerce.dto.CustomerResponse;
+import com.diego.ecommerce.models.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

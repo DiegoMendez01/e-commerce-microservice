@@ -1,5 +1,8 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.controllers;
 
+import com.diego.ecommerce.dto.CustomerRequest;
+import com.diego.ecommerce.dto.CustomerResponse;
+import com.diego.ecommerce.services.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

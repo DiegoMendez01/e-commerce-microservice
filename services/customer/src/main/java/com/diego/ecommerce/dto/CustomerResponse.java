@@ -1,4 +1,6 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.dto;
+
+import com.diego.ecommerce.models.Address;
 
 public record CustomerResponse(
         String id,

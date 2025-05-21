@@ -1,5 +1,10 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.services;
 
+import com.diego.ecommerce.dto.CustomerRequest;
+import com.diego.ecommerce.dto.CustomerResponse;
+import com.diego.ecommerce.exceptions.CustomerNotFoundException;
+import com.diego.ecommerce.mappers.CustomerMapper;
+import com.diego.ecommerce.models.Customer;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;

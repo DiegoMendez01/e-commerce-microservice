@@ -1,4 +1,4 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.models;
 
 import lombok.*;
 import org.springframework.validation.annotation.Validated;

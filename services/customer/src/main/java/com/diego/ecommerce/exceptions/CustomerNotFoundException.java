@@ -1,4 +1,4 @@
-package com.diego.ecommerce.customer;
+package com.diego.ecommerce.exceptions;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

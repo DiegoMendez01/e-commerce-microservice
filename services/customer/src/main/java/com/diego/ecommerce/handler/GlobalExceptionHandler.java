@@ -1,6 +1,6 @@
 package com.diego.ecommerce.handler;
 
-import com.diego.ecommerce.customer.CustomerNotFoundException;
+import com.diego.ecommerce.exceptions.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
