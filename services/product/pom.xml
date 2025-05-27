@@ -113,6 +113,23 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>10.20.1</version>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5432/product</url>
+					<user>diego</user>
+					<password>diego</password>
+					<schemas>
+						<schema>public</schema>
+					</schemas>
+					<baselineOnMigrate>true</baselineOnMigrate>
+					<baselineVersion>0</baselineVersion>
+					<baselineDescription>init</baselineDescription>
+					<cleanOnValidationError>true</cleanOnValidationError>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

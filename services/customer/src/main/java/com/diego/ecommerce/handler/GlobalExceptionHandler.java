@@ -1,5 +1,6 @@
 package com.diego.ecommerce.handler;
 
+import com.diego.ecommerce.exceptions.CustomerAlreadyExistsException;
 import com.diego.ecommerce.exceptions.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(exp.getMsg());
+    }
+
+    @ExceptionHandler(CustomerAlreadyExistsException.class)
+    public ResponseEntity<String> handleCustomerAlreadyExists(CustomerAlreadyExistsException exp) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(exp.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

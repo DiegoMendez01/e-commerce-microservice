@@ -2,6 +2,7 @@ package com.diego.ecommerce.services;
 
 import com.diego.ecommerce.dto.CustomerRequest;
 import com.diego.ecommerce.dto.CustomerResponse;
+import com.diego.ecommerce.exceptions.CustomerAlreadyExistsException;
 import com.diego.ecommerce.exceptions.CustomerNotFoundException;
 import com.diego.ecommerce.mappers.CustomerMapper;
 import com.diego.ecommerce.models.Customer;
@@ -22,6 +23,12 @@ public class CustomerService {
     private final CustomerMapper mapper;
 
     public String createCustomer(CustomerRequest request){
+        boolean existsEmail = repository.existsByEmail(request.email());
+        if (existsEmail) {
+            throw new CustomerAlreadyExistsException(
+                    String.format("El cliente con correo %s ya existe", request.email())
+            );
+        }
         var customer = repository.save(mapper.toCustomer(request));
         return customer.getId();
     }
@@ -29,7 +36,7 @@ public class CustomerService {
     public void updateCustomer(CustomerRequest request) {
         var customer = repository.findById(request.id())
                 .orElseThrow(() -> new CustomerNotFoundException(
-                    format("Cannot update customer:: Not customer found with the provided ID:: %s", request.id())
+                    format("No se puede actualizar el cliente: no se encontró un cliente con el ID proporcionado: %s", request.id())
                 ));
 
         mergerCustomer(customer, request);
@@ -59,17 +66,26 @@ public class CustomerService {
     }
 
     public Boolean existsById(String customerId) {
-        return repository.findById(customerId)
-                .isPresent();
+        boolean exists = repository.findById(customerId).isPresent();
+        if (!exists) {
+            throw new CustomerNotFoundException(
+                    String.format("No se encontró un cliente con el ID proporcionado: %s", customerId)
+            );
+        }
+        return true;
     }
 
     public CustomerResponse findById(String customerId) {
         return repository.findById(customerId)
                 .map(mapper::fromCustomer)
-                .orElseThrow(() -> new CustomerNotFoundException(format("No customer found with the provided ID:: %s", customerId)));
+                .orElseThrow(() -> new CustomerNotFoundException(format("No se encontró un cliente con el ID proporcionado: %s", customerId)));
     }
 
     public void deleteCustomer(String customerId) {
-        repository.deleteById(customerId);
+        var customer = repository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException(
+                        String.format("No se encontró un cliente con el ID proporcionado: %s", customerId)
+                ));
+        repository.delete(customer);
     }
 }
