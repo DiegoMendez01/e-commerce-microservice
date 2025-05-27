@@ -1,6 +1,5 @@
 package com.diego.product.category;
 
-import com.diego.product.product.ProductResponse;
 import org.springframework.stereotype.Service;
 
 @Service

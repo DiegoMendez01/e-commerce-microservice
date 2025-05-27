@@ -1,6 +1,5 @@
 package com.diego.product.category;
 
-import com.diego.product.product.ProductResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
