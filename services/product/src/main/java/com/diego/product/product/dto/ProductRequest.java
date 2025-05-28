@@ -7,15 +7,15 @@ import java.math.BigDecimal;
 
 public record ProductRequest(
         int id,
-        @NotNull(message = "Product name is required")
+        @NotNull(message = "El nombre del producto es requerido")
         String name,
-        @NotNull(message = "Product description is required")
+        @NotNull(message = "La descripción del producto es requerida")
         String description,
-        @Positive(message = "Available quantity should be positive")
+        @Positive(message = "La cantidad disponible debe ser positiva")
         double availableQuantity,
-        @Positive(message = "Price should be positive")
+        @Positive(message = "El precio debe ser positivo")
         BigDecimal price,
-        @NotNull(message = "Product category is required")
+        @NotNull(message = "La categoría del producto es requerida")
         Integer categoryId
 ) {
 

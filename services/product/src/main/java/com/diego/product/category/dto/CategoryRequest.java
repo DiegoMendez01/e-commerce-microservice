@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotNull;
 
 public record CategoryRequest(
         int id,
-        @NotNull(message = "Category name is required")
+        @NotNull(message = "El nombre de la categoría es requerido")
         String name,
-        @NotNull(message = "Category description is required")
+        @NotNull(message = "La descripción de la categoría es requerida")
         String description
 ) {
 }

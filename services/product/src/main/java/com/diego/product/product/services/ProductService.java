@@ -35,7 +35,7 @@ public class ProductService {
 
         var storedProducts = repository.findAllByIdInOrderById(productIds);
         if(productIds.size() != storedProducts.size()) {
-            throw new ProductPurchaseException("One or more products does not exists");
+            throw new ProductPurchaseException("Uno o más productos no existen");
         }
 
         var storedRequest = request
@@ -49,7 +49,7 @@ public class ProductService {
             var productRequest = storedRequest.get(i);
 
             if (product.getAvailableQuantity() < productRequest.quantity()) {
-                throw new ProductPurchaseException("Insufficient stock quantity for product with ID:: " + productRequest.productId());
+                throw new ProductPurchaseException("Cantidad insuficiente en stock para el producto con ID:: " + productRequest.productId());
             }
 
             var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
@@ -64,7 +64,7 @@ public class ProductService {
     public ProductResponse findById(Integer productId) {
         return repository.findById(productId)
                 .map(mapper::toProductResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Product not found with the ID:: " + productId));
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado con el ID:: " + productId));
     }
 
     public List<ProductResponse> findAll() {
