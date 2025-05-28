@@ -8,5 +8,11 @@ spring:
       database: customer
       authentication-database: admin
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
 server:
   port: 8090

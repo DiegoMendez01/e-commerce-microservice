@@ -9,6 +9,12 @@ spring:
           uri: lb:http://CUSTOMER-SERVICE
           predicates:
             - Path=/api/v1/customers/**
+        - id: customer-docs
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/v3/api-docs/customer
+          filters:
+            - RewritePath=/v3/api-docs/customer, /v3/api-docs
         - id: order-service
           uri: lb:http://ORDER-SERVICE
           predicates:
@@ -17,6 +23,12 @@ spring:
           uri: lb:http://ORDER-SERVICE
           predicates:
             - Path=/api/v1/order-lines/**
+        - id: order-docs
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/v3/api-docs/order
+          filters:
+            - RewritePath=/v3/api-docs/order, /v3/api-docs
         - id: product-service
           uri: lb:http://PRODUCT-SERVICE
           predicates:
@@ -25,10 +37,22 @@ spring:
           uri: lb:http://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/categories/**
+        - id: product-docs
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/v3/api-docs/product
+          filters:
+            - RewritePath=/v3/api-docs/product, /v3/api-docs
         - id: payment-service
           uri: lb:http://PAYMENT-SERVICE
           predicates:
             - Path=/api/v1/payments/**
+        - id: payment-docs
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/v3/api-docs/payment
+          filters:
+            - RewritePath=/v3/api-docs/payment, /v3/api-docs
 
 server:
   port: 8222

@@ -20,6 +20,12 @@ spring:
       properties:
         spring.json.type.mapping: orderConfirmation:com.diego.ecommerce.kafka.OrderConfirmation
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
 application:
   config:
     customer-url: http://localhost:8222/api/v1/customers
