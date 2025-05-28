@@ -1,5 +1,6 @@
-package com.diego.product.product;
+package com.diego.product.product.services;
 
+import com.diego.product.product.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

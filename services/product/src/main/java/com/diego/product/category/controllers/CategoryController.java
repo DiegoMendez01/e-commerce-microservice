@@ -1,5 +1,8 @@
-package com.diego.product.category;
+package com.diego.product.category.controllers;
 
+import com.diego.product.category.dto.CategoryRequest;
+import com.diego.product.category.dto.CategoryResponse;
+import com.diego.product.category.services.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

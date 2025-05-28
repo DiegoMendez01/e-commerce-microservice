@@ -1,6 +1,10 @@
-package com.diego.product.product;
+package com.diego.product.product.mapper;
 
-import com.diego.product.category.Category;
+import com.diego.product.category.models.Category;
+import com.diego.product.product.dto.ProductPurchaseResponse;
+import com.diego.product.product.dto.ProductRequest;
+import com.diego.product.product.dto.ProductResponse;
+import com.diego.product.product.models.Product;
 import org.springframework.stereotype.Component;
 
 @Component

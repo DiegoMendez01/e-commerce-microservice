@@ -1,4 +1,4 @@
-package com.diego.product.category;
+package com.diego.product.category.dto;
 
 import jakarta.validation.constraints.NotNull;
 

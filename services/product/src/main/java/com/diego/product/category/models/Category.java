@@ -1,6 +1,6 @@
-package com.diego.product.category;
+package com.diego.product.category.models;
 
-import com.diego.product.product.Product;
+import com.diego.product.product.models.Product;
 import jakarta.persistence.*;
 import lombok.*;
 

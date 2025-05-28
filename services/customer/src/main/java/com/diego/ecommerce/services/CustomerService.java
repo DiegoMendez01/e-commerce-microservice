@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,5 +88,34 @@ public class CustomerService {
                         String.format("No se encontró un cliente con el ID proporcionado: %s", customerId)
                 ));
         repository.delete(customer);
+    }
+
+    public List<CustomerResponse> findByNameLike(String name) {
+        String normalized = normalizeText(name);
+
+        var customers = repository.findAll().stream()
+                .filter(c -> {
+                    String firstNameNorm = normalizeText(c.getFirstName());
+                    String lastNameNorm = normalizeText(c.getLastName());
+                    return firstNameNorm.toLowerCase().contains(normalized.toLowerCase())
+                            || lastNameNorm.toLowerCase().contains(normalized.toLowerCase());
+                })
+                .toList();
+
+        if (customers.isEmpty()) {
+            throw new CustomerNotFoundException(
+                    String.format("No se encontraron clientes con el nombre o apellido parecido a: %s", name)
+            );
+        }
+
+        return customers.stream()
+                .map(mapper::fromCustomer)
+                .collect(Collectors.toList());
+    }
+
+    private String normalizeText(String input) {
+        if (input == null) return "";
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+        return normalized.replaceAll("\\p{M}", "");
     }
 }

@@ -1,5 +1,10 @@
-package com.diego.product.product;
+package com.diego.product.product.controllers;
 
+import com.diego.product.product.dto.ProductPurchaseRequest;
+import com.diego.product.product.dto.ProductPurchaseResponse;
+import com.diego.product.product.dto.ProductRequest;
+import com.diego.product.product.dto.ProductResponse;
+import com.diego.product.product.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

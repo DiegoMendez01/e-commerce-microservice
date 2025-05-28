@@ -44,6 +44,13 @@ public class CustomerController
         return ResponseEntity.ok(service.existsById(customerId));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<CustomerResponse>> searchByName(
+            @RequestParam("name") String name
+    ){
+        return ResponseEntity.ok(service.findByNameLike(name));
+    }
+
     @GetMapping("/{customer-id}")
     public ResponseEntity<CustomerResponse> findById(
             @PathVariable("customer-id") String customerId

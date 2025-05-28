@@ -1,4 +1,4 @@
-package com.diego.product.category;
+package com.diego.product.category.dto;
 
 public record CategoryResponse(
         int id,

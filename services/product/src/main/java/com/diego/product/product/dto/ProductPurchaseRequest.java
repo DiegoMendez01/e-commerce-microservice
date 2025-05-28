@@ -1,4 +1,4 @@
-package com.diego.product.product;
+package com.diego.product.product.dto;
 
 import jakarta.validation.constraints.NotNull;
 

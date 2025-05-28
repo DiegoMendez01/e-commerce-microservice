@@ -1,5 +1,8 @@
-package com.diego.product.category;
+package com.diego.product.category.mapper;
 
+import com.diego.product.category.dto.CategoryRequest;
+import com.diego.product.category.dto.CategoryResponse;
+import com.diego.product.category.models.Category;
 import org.springframework.stereotype.Service;
 
 @Service
