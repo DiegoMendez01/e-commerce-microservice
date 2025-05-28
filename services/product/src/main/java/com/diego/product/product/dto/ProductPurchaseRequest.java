@@ -3,9 +3,9 @@ package com.diego.product.product.dto;
 import jakarta.validation.constraints.NotNull;
 
 public record ProductPurchaseRequest(
-        @NotNull(message = "Product is mandatory")
+        @NotNull(message = "El producto es obligatorio")
         Integer productId,
-        @NotNull(message = "Quantity is mandatory")
+        @NotNull(message = "La cantidad es obligatoria")
         double quantity
 ) {
 }
