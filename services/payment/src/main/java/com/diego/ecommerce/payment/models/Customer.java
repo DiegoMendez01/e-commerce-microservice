@@ -1,4 +1,4 @@
-package com.diego.ecommerce.payment;
+package com.diego.ecommerce.payment.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

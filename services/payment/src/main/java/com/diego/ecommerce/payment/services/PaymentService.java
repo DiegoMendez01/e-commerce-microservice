@@ -1,7 +1,9 @@
-package com.diego.ecommerce.payment;
+package com.diego.ecommerce.payment.services;
 
 import com.diego.ecommerce.notification.NotificationProducer;
 import com.diego.ecommerce.notification.PaymentNotificationRequest;
+import com.diego.ecommerce.payment.dto.PaymentMapper;
+import com.diego.ecommerce.payment.dto.PaymentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,6 @@
-package com.diego.ecommerce.payment;
+package com.diego.ecommerce.payment.dto;
 
+import com.diego.ecommerce.payment.models.Payment;
 import org.springframework.stereotype.Service;
 
 @Service

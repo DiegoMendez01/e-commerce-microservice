@@ -1,5 +1,7 @@
-package com.diego.ecommerce.payment;
+package com.diego.ecommerce.payment.controllers;
 
+import com.diego.ecommerce.payment.dto.PaymentRequest;
+import com.diego.ecommerce.payment.services.PaymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

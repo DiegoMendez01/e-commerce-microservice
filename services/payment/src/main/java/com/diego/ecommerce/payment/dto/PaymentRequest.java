@@ -1,4 +1,7 @@
-package com.diego.ecommerce.payment;
+package com.diego.ecommerce.payment.dto;
+
+import com.diego.ecommerce.payment.models.Customer;
+import com.diego.ecommerce.payment.models.PaymentMethod;
 
 import java.math.BigDecimal;
 

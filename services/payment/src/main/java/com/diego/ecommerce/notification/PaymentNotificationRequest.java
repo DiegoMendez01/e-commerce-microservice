@@ -1,6 +1,6 @@
 package com.diego.ecommerce.notification;
 
-import com.diego.ecommerce.payment.PaymentMethod;
+import com.diego.ecommerce.payment.models.PaymentMethod;
 
 import java.math.BigDecimal;
 
