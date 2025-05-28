@@ -24,7 +24,7 @@ public class SwaggerConfig {
                                 .url("https://www.linkedin.com/in/diegomendezrojas2002/")
                         )
                 ).servers(List.of(
-                        new Server().url("http://localhost:8090").description("Servidor Local")
+                        new Server().url("http://localhost:8060").description("Servidor Local")
                 ));
     }
 
