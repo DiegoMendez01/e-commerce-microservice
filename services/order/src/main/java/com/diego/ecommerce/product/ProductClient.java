@@ -25,6 +25,10 @@ public class ProductClient {
     private final RestTemplate restTemplate;
 
     public List<PurchaseResponse> purchaseProducts(List<PurchaseRequest> requestBody) {
+        if (requestBody == null || requestBody.isEmpty()) {
+            throw new BusinessException("No se proporcionaron productos para comprar");
+        }
+
         HttpHeaders headers = new HttpHeaders();
         headers.set(CONTENT_TYPE, APPLICATION_JSON_VALUE);
 
@@ -40,7 +44,7 @@ public class ProductClient {
         );
 
         if (responseEntity.getStatusCode().isError()) {
-            throw new BusinessException("An error occurred while processing the products purchase: " + responseEntity.getStatusCode());
+            throw new BusinessException("Ocurrió un error al procesar la compra de productos: " + responseEntity.getStatusCode());
         }
 
         return  responseEntity.getBody();

@@ -32,37 +32,34 @@ public class ProductService {
         return repository.save(product).getId();
     }
 
-    public List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
+    @Transactional(rollbackOn = ProductPurchaseException.class)
+    public List<ProductPurchaseResponse> purchaseProducts(
+            List<ProductPurchaseRequest> request
+    ) {
         var productIds = request
                 .stream()
                 .map(ProductPurchaseRequest::productId)
                 .toList();
-
         var storedProducts = repository.findAllByIdInOrderById(productIds);
-        if(productIds.size() != storedProducts.size()) {
+        if (productIds.size() != storedProducts.size()) {
             throw new ProductPurchaseException("Uno o más productos no existen");
         }
-
-        var storedRequest = request
+        var sortedRequest = request
                 .stream()
                 .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
                 .toList();
-
         var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
         for (int i = 0; i < storedProducts.size(); i++) {
             var product = storedProducts.get(i);
-            var productRequest = storedRequest.get(i);
-
+            var productRequest = sortedRequest.get(i);
             if (product.getAvailableQuantity() < productRequest.quantity()) {
                 throw new ProductPurchaseException("Cantidad insuficiente en stock para el producto con ID:: " + productRequest.productId());
             }
-
             var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
             product.setAvailableQuantity(newAvailableQuantity);
             repository.save(product);
             purchasedProducts.add(mapper.toproductPurchaseResponse(product, productRequest.quantity()));
         }
-
         return purchasedProducts;
     }
 

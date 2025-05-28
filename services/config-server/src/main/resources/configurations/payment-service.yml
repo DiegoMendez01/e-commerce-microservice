@@ -15,7 +15,11 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: paymentConfirmation:com.diego.ecommerce.notification;.kafka.OrderConfirmation
+        spring.json.type.mapping: paymentConfirmation:com.diego.ecommerce.notification.PaymentNotificationRequest
 
 server:
   port: 8060
+
+application:
+  config:
+    product-url: http://localhost:8222/api/v1/products
