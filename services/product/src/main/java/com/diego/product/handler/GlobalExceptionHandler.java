@@ -1,6 +1,7 @@
 package com.diego.product.handler;
 
 import com.diego.product.exception.CategoryNotFoundException;
+import com.diego.product.exception.ProductNotFoundException;
 import com.diego.product.exception.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CategoryNotFoundException.class)
     public ResponseEntity<String> handle(CategoryNotFoundException exp) {
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(exp.getMessage());
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handle(ProductNotFoundException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
                 .body(exp.getMessage());
