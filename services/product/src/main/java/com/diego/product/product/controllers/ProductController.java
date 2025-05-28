@@ -1,6 +1,5 @@
 package com.diego.product.product.controllers;
 
-import com.diego.product.category.dto.CategoryRequest;
 import com.diego.product.product.dto.ProductPurchaseRequest;
 import com.diego.product.product.dto.ProductPurchaseResponse;
 import com.diego.product.product.dto.ProductRequest;
