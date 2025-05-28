@@ -18,8 +18,8 @@ import static com.diego.ecommerce.notification.NotificationType.PAYMENT_CONFIRMA
 import static java.lang.String.format;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class NotificationConsumer {
 
     private final NotificationRepository repository;
@@ -55,7 +55,7 @@ public class NotificationConsumer {
                         .orderConfirmation(orderConfirmation)
                         .build()
         );
-        var customerName = orderConfirmation.customer().firstname() + " " + orderConfirmation.customer().lastname();
+        var customerName = orderConfirmation.customer().firstName() + " " + orderConfirmation.customer().lastName();
         emailService.sendOrderConfirmationEmail(
                 orderConfirmation.customer().email(),
                 customerName,
