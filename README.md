@@ -100,3 +100,62 @@ CREATE DATABASE order;
 CREATE DATABASE payment;
 ```
 
+## Activar migración automática de tablas
+
+Una vez creadas las bases de datos, al momento de levantar cada uno de los microservicios (`product`, `order` y `payment`), gracias a la configuración en los archivos `application.yml` (por ejemplo, con la propiedad `spring.jpa.hibernate.ddl-auto=none`), Spring Boot detectará los cambios en las entidades y **creará o actualizará automáticamente las tablas necesarias** en cada base de datos.
+
+Esto significa que **no es necesario crear manualmente las tablas**: sólo con iniciar los microservicios, la migración se ejecutará automáticamente y tendrás la estructura de tablas lista para operar.
+
+### Orden para levantar los microservicios
+
+Para que el sistema funcione correctamente, es importante levantar los servicios en el orden adecuado:
+
+1. **Primero** levanta el **Config Server**  
+   Este servicio provee la configuración centralizada para todos los microservicios.
+
+2. **Luego** levanta el **Discovery Server (Eureka Server)**  
+   Este servicio permite el registro y descubrimiento dinámico de los microservicios.
+
+3. **Después** levanta cada uno de los microservicios específicos (`product`, `order`, `payment`, etc.)
+
+---
+
+### ¿Qué hacer si un servicio falla al iniciar?
+
+- Puede suceder que algún servicio no se conecte correctamente al **Config Server** o al **Discovery Server** porque aún no están completamente activos.
+- En ese caso, intenta:
+    - **Volver a levantar el servicio** que falló.
+    - **Esperar alrededor de 1 minuto** para que los servicios centrales (Config Server y Discovery Server) terminen de arrancar e igualmente con los demás servicios, esperar un minuto como promedio.
+    - Luego prueba nuevamente llamar al servicio usando **Postman** o **Swagger UI** para verificar que esté funcionan
+
+## URLs de Swagger UI por microservicio
+
+| Microservicio     | Base de Datos     | Puerto | URL Swagger UI                       |
+|-------------------|-------------------|--------|------------------------------------|
+| Customer Service   | MongoDB           | 8090   | http://localhost:8090/swagger-ui.html  |
+| Payment Service    | PostgreSQL (payment) | 8060   | http://localhost:8060/swagger-ui.html  |
+| Product Service    | PostgreSQL (product) | 8050   | http://localhost:8050/swagger-ui.html  |
+| Order Service      | PostgreSQL (order)   | 8070   | http://localhost:8070/swagger-ui.html  |
+
+---
+
+### Notas
+
+- El path base para la documentación JSON de la API es:  
+  `/v3/api-docs`  
+  Por ejemplo, para el Order Service:  
+  `http://localhost:8070/v3/api-docs`
+
+- La UI de Swagger se accede a través del path:  
+  `/swagger-ui.html`
+
+- Asegúrate que cada servicio esté corriendo en el puerto asignado para poder acceder correctamente a la documentación.
+
+---
+
+### Resumen de configuración de puertos
+
+- Customer Service → puerto **8090**
+- Payment Service → puerto **8060**
+- Product Service → puerto **8050**
+- Order Service → puerto **8070**
