@@ -1,6 +1,7 @@
 package com.diego.ecommerce.handler;
 
 import com.diego.ecommerce.exception.BusinessException;
+import com.diego.ecommerce.exception.NoStockAvailableException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exp.getMsg());
+    }
+
+    @ExceptionHandler(NoStockAvailableException.class)
+    public ResponseEntity<String> handle(NoStockAvailableException exp) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exp.getMessage());
     }
 }

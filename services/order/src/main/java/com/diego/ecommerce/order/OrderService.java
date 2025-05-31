@@ -2,6 +2,7 @@ package com.diego.ecommerce.order;
 
 import com.diego.ecommerce.customer.CustomerClient;
 import com.diego.ecommerce.exception.BusinessException;
+import com.diego.ecommerce.exception.NoStockAvailableException;
 import com.diego.ecommerce.kafka.OrderConfirmation;
 import com.diego.ecommerce.kafka.OrderProducer;
 import com.diego.ecommerce.orderline.OrderLineRequest;
@@ -10,9 +11,11 @@ import com.diego.ecommerce.payment.PaymentClient;
 import com.diego.ecommerce.payment.PaymentRequest;
 import com.diego.ecommerce.product.ProductClient;
 import com.diego.ecommerce.product.PurchaseRequest;
+import com.diego.ecommerce.product.PurchaseResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,10 +35,16 @@ public class OrderService {
     public Integer createdOrder(OrderRequest request) {
         // check the customer --> OpenFeign
         var customer = this.customerClient.findCustomerById(request.customerId())
-                .orElseThrow(() -> new BusinessException("Cannot create order:: No customer exists with the provided ID"));
+                .orElseThrow(() -> new BusinessException("No se puede crear la orden:: No existe un cliente con el ID asignado"));
 
         // purchase the products --> product-ms (RestTemplate)
-        var purchasedProducts = this.productClient.purchaseProducts(request.products());
+        List<PurchaseResponse> purchasedProducts;
+        try {
+            purchasedProducts = this.productClient.purchaseProducts(request.products());
+        } catch (HttpClientErrorException.BadRequest ex) {
+            String msg = ex.getResponseBodyAsString();
+            throw new NoStockAvailableException("Error al comprar productos: " + msg);
+        }
 
         // persist order
         var order = this.repository.save(mapper.toOrder(request));
@@ -52,7 +61,7 @@ public class OrderService {
         }
 
         var paymentRequest = new PaymentRequest(
-                request.amount(),
+                request.totalAmount(),
                 request.paymentMethod(),
                 order.getId(),
                 order.getReference(),
@@ -64,7 +73,7 @@ public class OrderService {
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
                         request.reference(),
-                        request.amount(),
+                        request.totalAmount(),
                         request.paymentMethod(),
                         customer,
                         purchasedProducts
@@ -85,6 +94,6 @@ public class OrderService {
     public OrderResponse findById(Integer id) {
         return this.repository.findById(id)
                 .map(this.mapper::fromOrder)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("No se encontró la orden con ID: %d", id)));
     }
 }

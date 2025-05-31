@@ -39,6 +39,15 @@ public class ProductController {
         return ResponseEntity.ok(service.findById(productId));
     }
 
+    @GetMapping("/{product-id}/stock")
+    public ResponseEntity<Boolean> checkStock(
+            @PathVariable("product-id") Integer productId,
+            @RequestParam("quantity") Integer quantity
+    ) {
+        boolean available = service.checkStock(productId, quantity);
+        return ResponseEntity.ok(available);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateProduct(
             @PathVariable Integer id,

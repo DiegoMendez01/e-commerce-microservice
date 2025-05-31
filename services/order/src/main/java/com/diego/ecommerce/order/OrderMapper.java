@@ -12,7 +12,7 @@ public class OrderMapper {
                 .id(request.id())
                 .customerId(request.customerId())
                 .reference(request.reference())
-                .totalAmount(request.amount())
+                .totalAmount(request.totalAmount())
                 .paymentMethod(request.paymentMethod())
                 .build();
     }

@@ -15,15 +15,15 @@ import java.util.List;
 public record OrderRequest(
         Integer id,
         String reference,
-        @Positive(message = "Order amount should be positive")
-        BigDecimal amount,
-        @NotNull(message = "Payment method should be precised")
+        @Positive(message = "El monto de la orden debe ser positivo")
+        BigDecimal totalAmount,
+        @NotNull(message = "Debe especificar el método de pago")
         PaymentMethod paymentMethod,
-        @NotNull(message = "Customer should be present")
-        @NotEmpty(message = "Customer should be present")
-        @NotBlank(message = "Customer should be present")
+        @NotNull(message = "El cliente es obligatorio")
+        @NotEmpty(message = "El cliente es obligatorio")
+        @NotBlank(message = "El cliente es obligatorio")
         String customerId,
-        @NotEmpty(message = "You should at least purchase one product")
+        @NotEmpty(message = "Debe comprar al menos un producto")
         List<PurchaseRequest> products
 ) {
 }

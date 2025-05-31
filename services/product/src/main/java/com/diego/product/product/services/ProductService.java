@@ -111,4 +111,10 @@ public class ProductService {
                 .map(mapper::toProductResponse)
                 .collect(Collectors.toList());
     }
+
+    public boolean checkStock(Integer productId, Integer quantity) {
+        var product = repository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado con ID: " + productId));
+        return product.getAvailableQuantity() >= quantity;
+    }
 }

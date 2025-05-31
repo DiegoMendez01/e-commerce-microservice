@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
@@ -17,6 +17,8 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     clean-on-validation-error: true
+    clean-disabled: false
+    locations: classpath:db
 
 springdoc:
   api-docs:

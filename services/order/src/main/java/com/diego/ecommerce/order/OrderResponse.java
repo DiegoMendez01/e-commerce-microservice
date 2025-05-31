@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public record OrderResponse(
         Integer id,
         String reference,
-        BigDecimal amount,
+        BigDecimal totalAmount,
         PaymentMethod paymentMethod,
         String customerId
 ) {

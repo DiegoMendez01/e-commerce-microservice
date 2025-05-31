@@ -22,7 +22,8 @@ import static jakarta.persistence.EnumType.STRING;
 public class Payment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_seq_gen")
+    @SequenceGenerator(name = "payment_seq_gen", sequenceName = "payment_seq", allocationSize = 1)
     private Integer id;
 
     private BigDecimal amount;

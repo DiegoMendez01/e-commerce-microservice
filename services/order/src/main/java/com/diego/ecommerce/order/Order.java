@@ -22,7 +22,8 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_order_seq_gen")
+    @SequenceGenerator(name = "customer_order_seq_gen", sequenceName = "customer_order_seq", allocationSize = 1)
     private Integer id;
 
     private String reference;
