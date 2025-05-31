@@ -49,17 +49,4 @@ public class ProductClient {
 
         return  responseEntity.getBody();
     }
-
-    public boolean checkStock(Integer productId, double quantity) {
-        String url = String.format("%s/%d/stock?quantity=%f", productUrl, productId, quantity);
-
-        ResponseEntity<Boolean> responseEntity = restTemplate.getForEntity(url, Boolean.class);
-
-        if (responseEntity.getStatusCode().isError()) {
-            throw new BusinessException("Error al consultar stock del producto con ID " + productId);
-        }
-
-        Boolean available = responseEntity.getBody();
-        return available != null && available;
-    }
 }
