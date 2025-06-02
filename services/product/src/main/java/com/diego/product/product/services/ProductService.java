@@ -104,7 +104,11 @@ public class ProductService {
         var products = repository.findByNameContainingIgnoreCase(name);
 
         if (products.isEmpty()) {
-            throw new CategoryNotFoundException("No se encontraron productos con el nombre proporcionado: " + name);
+            products = repository.findByCategoryNameContainingIgnoreCase(name);
+
+            if (products.isEmpty()) {
+                throw new CategoryNotFoundException("No se encontraron productos ni categorías con el nombre proporcionado: " + name);
+            }
         }
 
         return products.stream()
