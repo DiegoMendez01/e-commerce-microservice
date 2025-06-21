@@ -22,7 +22,8 @@ public class OrderLineMapper {
     public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
         return new OrderLineResponse(
                 orderLine.getId(),
-                orderLine.getQuantity()
+                orderLine.getQuantity(),
+                orderLine.getProductId()
         );
     }
 }
